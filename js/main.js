@@ -10,9 +10,11 @@ $(document).ready(function() {
   
   //click listener for the cards
   $('.cards').click(function() {
+   
     // add "selected" class to card that was clicked which will change its css
     $(this).addClass('selected');
 
+    //conditional handling when a 3rd card is clicked but there is no match in the first 2
     if($('.selected').length == 3) {
       $(this).siblings('.selected').removeClass('selected');
     }
@@ -20,18 +22,17 @@ $(document).ready(function() {
     //conditional based on number of cards clicked
 
     if($('.selected').length == 2) {
-      //do stuff... compare etc... 
       numMoves = numMoves + 1;
-      var firstCard = $('.selected:first');
-      var secondCard = $('.selected:last');
+      var firstCard = $('.selected:eq(0)');
+      var secondCard = $('.selected:eq(1)');
 
-      if (firstCard.hasClass('king') === secondCard.hasClass('king')) {
+      if(firstCard.hasClass('king') === secondCard.hasClass('king')) {
         firstCard.addClass('matched').removeClass('selected');
         secondCard.addClass('matched').removeClass('selected');   
       };
 
     } else {
-      console.log('ONLY selected 1 card...');
+      console.log('Only 1 card selected...');
     }
 
     if($('.matched').length == 4) {
